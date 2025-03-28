@@ -1201,66 +1201,6 @@ class NetworkTools:
         except Exception as e:
             return (False, f"エラー: {str(e)}")
 
-def generate_junit_report(self, output_file: str) -> None:
-    """
-    テスト結果のレポートをJUnit XML形式で生成
-    
-    Args:
-        output_file: 出力ファイルパス
-    """
-    try:
-        import xml.etree.ElementTree as ET
-        from xml.dom import minidom
-        
-        # JUnitXML形式のルート要素
-        test_suites = ET.Element("testsuites")
-        
-        # カテゴリごとにテストスイートを作成
-        categories = {}
-        for result in self.results:
-            if result.category not in categories:
-                categories[result.category] = []
-            categories[result.category].append(result)
-        
-        for category, results in sorted(categories.items()):
-            test_suite = ET.SubElement(test_suites, "testsuite")
-            test_suite.set("name", category)
-            test_suite.set("tests", str(len(results)))
-            test_suite.set("failures", str(sum(1 for r in results if r.success is False)))
-            test_suite.set("skipped", str(sum(1 for r in results if r.success is None)))
-            test_suite.set("timestamp", datetime.now().isoformat())
-            
-            for result in results:
-                test_case = ET.SubElement(test_suite, "testcase")
-                test_case.set("name", result.name)
-                test_case.set("classname", result.test_id)
-                test_case.set("time", str(result.duration))
-                
-                if result.success is False:
-                    failure = ET.SubElement(test_case, "failure")
-                    failure.set("message", result.message)
-                    failure.text = "\n".join(result.details)
-                    if result.error:
-                        failure.text += f"\n\nError: {str(result.error)}"
-                
-                elif result.success is None:
-                    skipped = ET.SubElement(test_case, "skipped")
-                    skipped.set("message", result.message or "テストがスキップされました")
-                
-                system_out = ET.SubElement(test_case, "system-out")
-                system_out.text = "\n".join(result.details)
-        
-        # XMLを整形して出力
-        rough_string = ET.tostring(test_suites, "utf-8")
-        reparsed = minidom.parseString(rough_string)
-        pretty_xml = reparsed.toprettyxml(indent="  ")
-        
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(pretty_xml)
-        
-        logger.info(f"JUnit XMLレポートを生成しました: {output_file}")
-    except Exception as e:
-        logger.error(f"JUnit XMLレポート生成中にエラーが発生: {e}")
 
 class TestResult:
     """テスト結果クラス"""
@@ -2573,67 +2513,6 @@ def execute_test(self, test_case: Dict) -> TestResult:
     return result
 
     
-def generate_junit_report(self, output_file: str) -> None:
-    """
-    テスト結果のレポートをJUnit XML形式で生成
-    
-    Args:
-        output_file: 出力ファイルパス
-    """
-    try:
-        import xml.etree.ElementTree as ET
-        from xml.dom import minidom
-        
-        # JUnitXML形式のルート要素
-        test_suites = ET.Element("testsuites")
-        
-        # カテゴリごとにテストスイートを作成
-        categories = {}
-        for result in self.results:
-            if result.category not in categories:
-                categories[result.category] = []
-            categories[result.category].append(result)
-        
-        for category, results in sorted(categories.items()):
-            test_suite = ET.SubElement(test_suites, "testsuite")
-            test_suite.set("name", category)
-            test_suite.set("tests", str(len(results)))
-            test_suite.set("failures", str(sum(1 for r in results if r.success is False)))
-            test_suite.set("skipped", str(sum(1 for r in results if r.success is None)))
-            test_suite.set("timestamp", datetime.now().isoformat())
-            
-            for result in results:
-                test_case = ET.SubElement(test_suite, "testcase")
-                test_case.set("name", result.name)
-                test_case.set("classname", result.test_id)
-                test_case.set("time", str(result.duration))
-                
-                if result.success is False:
-                    failure = ET.SubElement(test_case, "failure")
-                    failure.set("message", result.message)
-                    failure.text = "\n".join(result.details)
-                    if result.error:
-                        failure.text += f"\n\nError: {str(result.error)}"
-                
-                elif result.success is None:
-                    skipped = ET.SubElement(test_case, "skipped")
-                    skipped.set("message", result.message or "テストがスキップされました")
-                
-                system_out = ET.SubElement(test_case, "system-out")
-                system_out.text = "\n".join(result.details)
-        
-        # XMLを整形して出力
-        rough_string = ET.tostring(test_suites, "utf-8")
-        reparsed = minidom.parseString(rough_string)
-        pretty_xml = reparsed.toprettyxml(indent="  ")
-        
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(pretty_xml)
-        
-        logger.info(f"JUnit XMLレポートを生成しました: {output_file}")
-    except Exception as e:
-        logger.error(f"JUnit XMLレポート生成中にエラーが発生: {e}")
-
 def main():
     """メイン関数"""
     parser = argparse.ArgumentParser(description='Proxmox クラスターテスト自動化')
