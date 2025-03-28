@@ -1,0 +1,357 @@
+カテゴリ	テストケースID	目的	手順	期待結果	合否判定	前提条件	優先度	テスト方法	テスト対象ノード	テストコマンド	検証方法
+ノード基本機能テスト	NODE-101	Proxmoxノード1の起動確認	"1. ノード1の電源をオンにする
+2. 起動プロセスを観察する"	ノード1が正常に起動し、ログインプロンプトが表示されること	ノード1が正常に起動した場合：合格、起動に失敗した場合：不合格	なし	1	手動	node1	N/A	N/A
+ノード基本機能テスト	NODE-102	Proxmoxノード2の起動確認	"1. ノード2の電源をオンにする
+2. 起動プロセスを観察する"	ノード2が正常に起動し、ログインプロンプトが表示されること	ノード2が正常に起動した場合：合格、起動に失敗した場合：不合格	なし	1	手動	node2	N/A	N/A
+ノード基本機能テスト	NODE-103	Proxmoxノード3の起動確認	"1. ノード3の電源をオンにする
+2. 起動プロセスを観察する"	ノード3が正常に起動し、ログインプロンプトが表示されること	ノード3が正常に起動した場合：合格、起動に失敗した場合：不合格	なし	1	手動	node3	N/A	N/A
+ノード基本機能テスト	NODE-104	ProxmoxBackupServerの起動確認	"1. バックアップサーバーの電源をオンにする
+2. 起動プロセスを観察する"	バックアップサーバーが正常に起動し、ログインプロンプトが表示されること	バックアップサーバーが正常に起動した場合：合格、起動に失敗した場合：不合格	なし	1	手動	backup	N/A	N/A
+ノード基本機能テスト	NODE-111	Proxmoxノード1の物理コンソールログイン確認	"1. ノード1の物理コンソールに接続する
+2. rootユーザーでログインを試みる"	物理コンソールからrootユーザーでログインできること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NODE-101	1	手動	node1	N/A	N/A
+ノード基本機能テスト	NODE-112	Proxmoxノード2の物理コンソールログイン確認	"1. ノード2の物理コンソールに接続する
+2. rootユーザーでログインを試みる"	物理コンソールからrootユーザーでログインできること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NODE-102	1	手動	node2	N/A	N/A
+ノード基本機能テスト	NODE-113	Proxmoxノード3の物理コンソールログイン確認	"1. ノード3の物理コンソールに接続する
+2. rootユーザーでログインを試みる"	物理コンソールからrootユーザーでログインできること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NODE-103	1	手動	node3	N/A	N/A
+ノード基本機能テスト	NODE-114	ProxmoxBackupServerの物理コンソールログイン確認	"1. バックアップサーバーの物理コンソールに接続する
+2. rootユーザーでログインを試みる"	物理コンソールからrootユーザーでログインできること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NODE-104	1	手動	backup	N/A	N/A
+ハードウェアテスト	HW-101	Proxmoxノード1のメモリサイズ確認	"1. ノード1にログインする
+2. 'free -h'コマンドを実行する
+3. 合計メモリ量を確認する"	合計メモリ量が256GBであること	設定されたメモリサイズが期待値と一致する場合：合格、一致しない場合：不合格	NODE-111	1	SSH	node1	free -h | grep Mem:	CONTAINS(256G|262144M)
+ハードウェアテスト	HW-102	Proxmoxノード2のメモリサイズ確認	"1. ノード2にログインする
+2. 'free -h'コマンドを実行する
+3. 合計メモリ量を確認する"	合計メモリ量が256GBであること	設定されたメモリサイズが期待値と一致する場合：合格、一致しない場合：不合格	NODE-112	1	SSH	node2	free -h | grep Mem:	CONTAINS(256G|262144M)
+ハードウェアテスト	HW-103	Proxmoxノード3のメモリサイズ確認	"1. ノード3にログインする
+2. 'free -h'コマンドを実行する
+3. 合計メモリ量を確認する"	合計メモリ量が256GBであること	設定されたメモリサイズが期待値と一致する場合：合格、一致しない場合：不合格	NODE-113	1	SSH	node3	free -h | grep Mem:	CONTAINS(256G|262144M)
+ハードウェアテスト	HW-111	Proxmoxノード1のCPU確認	"1. ノード1にログインする
+2. 'lscpu'コマンドを実行する
+3. CPUモデルとコア数を確認する"	Xeon Silver 4509Y、16コア/32スレッド（2ソケット）であること	設定されたCPUが期待値と一致する場合：合格、一致しない場合：不合格	NODE-111	1	SSH	node1	lscpu	CONTAINS(Xeon Silver 4509Y) && CONTAINS(CPU(s): 32)
+ハードウェアテスト	HW-112	Proxmoxノード2のCPU確認	"1. ノード2にログインする
+2. 'lscpu'コマンドを実行する
+3. CPUモデルとコア数を確認する"	Xeon Silver 4509Y、16コア/32スレッド（2ソケット）であること	設定されたCPUが期待値と一致する場合：合格、一致しない場合：不合格	NODE-112	1	SSH	node2	lscpu	CONTAINS(Xeon Silver 4509Y) && CONTAINS(CPU(s): 32)
+ハードウェアテスト	HW-113	Proxmoxノード3のCPU確認	"1. ノード3にログインする
+2. 'lscpu'コマンドを実行する
+3. CPUモデルとコア数を確認する"	Xeon Silver 4509Y、16コア/32スレッド（2ソケット）であること	設定されたCPUが期待値と一致する場合：合格、一致しない場合：不合格	NODE-113	1	SSH	node3	lscpu	CONTAINS(Xeon Silver 4509Y) && CONTAINS(CPU(s): 32)
+ハードウェアテスト	HW-121	Proxmoxノード1のディスク確認	"1. ノード1にログインする
+2. 'lsblk'コマンドを実行する
+3. システムディスクとCephディスクを確認する"	システムディスク(NVMe 250GB)、Cephディスク(SSD 1.92TB×6)が正しく認識されていること	設定されたディスクが期待値と一致する場合：合格、一致しない場合：不合格	NODE-111	1	SSH	node1	lsblk -d	CONTAINS(nvme0n1) && REGEX(sd[a-f])
+ハードウェアテスト	HW-122	Proxmoxノード2のディスク確認	"1. ノード2にログインする
+2. 'lsblk'コマンドを実行する
+3. システムディスクとCephディスクを確認する"	システムディスク(NVMe 250GB)、Cephディスク(SSD 1.92TB×6)が正しく認識されていること	設定されたディスクが期待値と一致する場合：合格、一致しない場合：不合格	NODE-112	1	SSH	node2	lsblk -d	CONTAINS(nvme0n1) && REGEX(sd[a-f])
+ハードウェアテスト	HW-123	Proxmoxノード3のディスク確認	"1. ノード3にログインする
+2. 'lsblk'コマンドを実行する
+3. システムディスクとCephディスクを確認する"	システムディスク(NVMe 250GB)、Cephディスク(SSD 1.92TB×6)が正しく認識されていること	設定されたディスクが期待値と一致する場合：合格、一致しない場合：不合格	NODE-113	1	SSH	node3	lsblk -d	CONTAINS(nvme0n1) && REGEX(sd[a-f])
+電源テスト	POW-101	Proxmoxノード1の電源冗長性確認	"1. ノード1のハードウェア情報を確認する
+2. 'ipmitool'などを使用して電源の状態を確認する"	2つの電源ユニットが搭載され、両方が正常状態であること	電源が冗長構成で正常動作している場合：合格、冗長でない、または一部障害がある場合：不合格	NODE-111	1	SSH	node1	ipmitool sdr | grep 'Power Supply'	REGEX(Power Supply.*ok) && REGEX(Power Supply.*ok)
+電源テスト	POW-102	Proxmoxノード2の電源冗長性確認	"1. ノード2のハードウェア情報を確認する
+2. 'ipmitool'などを使用して電源の状態を確認する"	2つの電源ユニットが搭載され、両方が正常状態であること	電源が冗長構成で正常動作している場合：合格、冗長でない、または一部障害がある場合：不合格	NODE-112	1	SSH	node2	ipmitool sdr | grep 'Power Supply'	REGEX(Power Supply.*ok) && REGEX(Power Supply.*ok)
+電源テスト	POW-103	Proxmoxノード3の電源冗長性確認	"1. ノード3のハードウェア情報を確認する
+2. 'ipmitool'などを使用して電源の状態を確認する"	2つの電源ユニットが搭載され、両方が正常状態であること	電源が冗長構成で正常動作している場合：合格、冗長でない、または一部障害がある場合：不合格	NODE-113	1	SSH	node3	ipmitool sdr | grep 'Power Supply'	REGEX(Power Supply.*ok) && REGEX(Power Supply.*ok)
+ネットワークテスト	NET-101	Proxmoxノード1のIPアドレス確認	"1. ノード1にログインする
+2. 'ip addr show'コマンドを実行する
+3. vmbr0インターフェースのIPアドレスを確認する"	vmbr0のIPアドレスが10.200.20.30/24であること	設定されたIPアドレスが期待値と一致する場合：合格、一致しない場合：不合格	NODE-111	1	SSH	node1	ip addr show vmbr0	CONTAINS(10.200.20.30/24)
+ネットワークテスト	NET-102	Proxmoxノード2のIPアドレス確認	"1. ノード2にログインする
+2. 'ip addr show'コマンドを実行する
+3. vmbr0インターフェースのIPアドレスを確認する"	vmbr0のIPアドレスが10.200.20.31/24であること	設定されたIPアドレスが期待値と一致する場合：合格、一致しない場合：不合格	NODE-112	1	SSH	node2	ip addr show vmbr0	CONTAINS(10.200.20.31/24)
+ネットワークテスト	NET-103	Proxmoxノード3のIPアドレス確認	"1. ノード3にログインする
+2. 'ip addr show'コマンドを実行する
+3. vmbr0インターフェースのIPアドレスを確認する"	vmbr0のIPアドレスが10.200.20.32/24であること	設定されたIPアドレスが期待値と一致する場合：合格、一致しない場合：不合格	NODE-113	1	SSH	node3	ip addr show vmbr0	CONTAINS(10.200.20.32/24)
+ネットワークテスト	NET-104	ProxmoxBackupServerのIPアドレス確認	"1. バックアップサーバーにログインする
+2. 'ip addr show'コマンドを実行する
+3. 管理インターフェースのIPアドレスを確認する"	管理インターフェースのIPアドレスが192.168.242.10/24であること	設定されたIPアドレスが期待値と一致する場合：合格、一致しない場合：不合格	NODE-114	1	SSH	backup	ip addr show | grep 192.168.242.10	CONTAINS(192.168.242.10/24)
+ネットワークテスト	NET-111	Proxmoxノード1のデフォルトゲートウェイ確認	"1. ノード1にログインする
+2. 'ip route show'コマンドを実行する
+3. デフォルトゲートウェイを確認する"	デフォルトゲートウェイが10.200.20.254であること	設定されたゲートウェイが期待値と一致する場合：合格、一致しない場合：不合格	NET-101	1	SSH	node1	ip route | grep default	CONTAINS(10.200.20.254)
+ネットワークテスト	NET-112	Proxmoxノード2のデフォルトゲートウェイ確認	"1. ノード2にログインする
+2. 'ip route show'コマンドを実行する
+3. デフォルトゲートウェイを確認する"	デフォルトゲートウェイが10.200.20.254であること	設定されたゲートウェイが期待値と一致する場合：合格、一致しない場合：不合格	NET-102	1	SSH	node2	ip route | grep default	CONTAINS(10.200.20.254)
+ネットワークテスト	NET-113	Proxmoxノード3のデフォルトゲートウェイ確認	"1. ノード3にログインする
+2. 'ip route show'コマンドを実行する
+3. デフォルトゲートウェイを確認する"	デフォルトゲートウェイが10.200.20.254であること	設定されたゲートウェイが期待値と一致する場合：合格、一致しない場合：不合格	NET-103	1	SSH	node3	ip route | grep default	CONTAINS(10.200.20.254)
+ネットワークテスト	NET-114	ProxmoxBackupServerのデフォルトゲートウェイ確認	"1. バックアップサーバーにログインする
+2. 'ip route show'コマンドを実行する
+3. デフォルトゲートウェイを確認する"	デフォルトゲートウェイが正しく設定されていること	設定されたゲートウェイが期待値と一致する場合：合格、一致しない場合：不合格	NET-104	1	SSH	backup	ip route | grep default	REGEX(default via [0-9.]+)
+ネットワークテスト	NET-121	Proxmoxノード1のCorosyncネットワーク確認	"1. ノード1にログインする
+2. 'ip addr show'コマンドを実行する
+3. enp42s0f3np3のIPアドレスを確認する"	enp42s0f3np3のIPアドレスが192.168.240.1/24であること	設定されたIPアドレスが期待値と一致する場合：合格、一致しない場合：不合格	NET-101	1	SSH	node1	ip addr show enp42s0f3np3	CONTAINS(192.168.240.1/24)
+ネットワークテスト	NET-122	Proxmoxノード1のCephネットワーク確認	"1. ノード1にログインする
+2. 'ip addr show'コマンドを実行する
+3. bond1のIPアドレスを確認する"	bond1のIPアドレスが192.168.241.1/24であること	設定されたIPアドレスが期待値と一致する場合：合格、一致しない場合：不合格	NET-101	1	SSH	node1	ip addr show bond1	CONTAINS(192.168.241.1/24)
+ネットワークテスト	NET-123	Proxmoxノード1のバックアップネットワーク確認	"1. ノード1にログインする
+2. 'ip addr show'コマンドを実行する
+3. vmbr1のIPアドレスを確認する"	vmbr1のIPアドレスが192.168.242.20/24であること	設定されたIPアドレスが期待値と一致する場合：合格、一致しない場合：不合格	NET-101	1	SSH	node1	ip addr show vmbr1	CONTAINS(192.168.242.20/24)
+ネットワークテスト	NET-131	MTUサイズ設定検証	"1. 各ネットワークインターフェース(Corosync、Ceph、バックアップ)のMTU設定を確認
+2. 各ネットワークで大きなパケットサイズでのping実行(ping -s 8000)
+3. 各ネットワークでのパフォーマンス比較(MTU 1500 vs 9000)"	各ネットワークで設計通りのMTU値(9000)が設定され、大きなパケットサイズでの通信が正常に行えること	MTU設定が正しく適用され大きなパケットサイズの通信が成功した場合：合格、失敗した場合：不合格	NET-121、NET-122、NET-123	1	SSH	node1	ip link show | grep mtu	CONTAINS(mtu 9000)
+インストール設定テスト	INST-101	Proxmox VEのインストールとバージョン確認	"1. 各ノードにSSH接続する
+2. pveversion -v コマンドを実行する
+3. バージョン情報を確認する"	全てのノードで同じProxmox VEバージョン(8.3.0)が表示されること	すべてのノードで同じバージョンが確認できた場合：合格、バージョンが異なるまたは確認できない場合：不合格	NODE-111、NODE-112、NODE-113	1	SSH	node1	pveversion -v	CONTAINS(pve-manager/8.3.0)
+インストール設定テスト	INST-102	NTP同期状態の確認	"1. 各ノードにSSH接続する
+2. timedatectl status コマンドを実行する
+3. NTP同期状態を確認する"	全てのノードで「NTP synchronized: yes」と表示されること	すべてのノードでNTP同期が確認できた場合：合格、同期していないノードがある場合：不合格	INST-101	1	SSH	node1	timedatectl status	CONTAINS(NTP synchronized: yes)
+サービステスト	SVC-101	Proxmoxノード1のpveサービス確認	"1. ノード1にログインする
+2. 'systemctl status pvedaemon pveproxy pvestatd'コマンドを実行する"	pvedaemon、pveproxy、pvestatdサービスが実行中であること	すべてのサービスが実行中の場合：合格、一部または全部が停止している場合：不合格	NODE-111	1	SSH	node1	systemctl is-active pvedaemon pveproxy pvestatd	CONTAINS(active) && !CONTAINS(inactive)
+サービステスト	SVC-102	Proxmoxノード2のpveサービス確認	"1. ノード2にログインする
+2. 'systemctl status pvedaemon pveproxy pvestatd'コマンドを実行する"	pvedaemon、pveproxy、pvestatdサービスが実行中であること	すべてのサービスが実行中の場合：合格、一部または全部が停止している場合：不合格	NODE-112	1	SSH	node2	systemctl is-active pvedaemon pveproxy pvestatd	CONTAINS(active) && !CONTAINS(inactive)
+サービステスト	SVC-103	Proxmoxノード3のpveサービス確認	"1. ノード3にログインする
+2. 'systemctl status pvedaemon pveproxy pvestatd'コマンドを実行する"	pvedaemon、pveproxy、pvestatdサービスが実行中であること	すべてのサービスが実行中の場合：合格、一部または全部が停止している場合：不合格	NODE-113	1	SSH	node3	systemctl is-active pvedaemon pveproxy pvestatd	CONTAINS(active) && !CONTAINS(inactive)
+サービステスト	SVC-111	Proxmoxノード1のcorosyncサービス確認	"1. ノード1にログインする
+2. 'systemctl status corosync'コマンドを実行する"	corosyncサービスが実行中であること	サービスが実行中の場合：合格、停止している場合：不合格	SVC-101	1	SSH	node1	systemctl is-active corosync	CONTAINS(active)
+サービステスト	SVC-112	Proxmoxノード2のcorosyncサービス確認	"1. ノード2にログインする
+2. 'systemctl status corosync'コマンドを実行する"	corosyncサービスが実行中であること	サービスが実行中の場合：合格、停止している場合：不合格	SVC-102	1	SSH	node2	systemctl is-active corosync	CONTAINS(active)
+サービステスト	SVC-113	Proxmoxノード3のcorosyncサービス確認	"1. ノード3にログインする
+2. 'systemctl status corosync'コマンドを実行する"	corosyncサービスが実行中であること	サービスが実行中の場合：合格、停止している場合：不合格	SVC-103	1	SSH	node3	systemctl is-active corosync	CONTAINS(active)
+サービステスト	SVC-121	ProxmoxBackupServerのサービス確認	"1. バックアップサーバーにログインする
+2. 'systemctl status proxmox-backup'コマンドを実行する"	proxmox-backupサービスが実行中であること	サービスが実行中の場合：合格、停止している場合：不合格	NODE-114	1	SSH	backup	systemctl is-active proxmox-backup	CONTAINS(active)
+クラスター機能テスト	CL-101	Proxmoxノード1のクラスタ状態確認	"1. ノード1にログインする
+2. 'pvecm status'コマンドを実行する"	クラスタがQuorateであり、すべてのノードがメンバーとして表示されること	クラスタが正常状態の場合：合格、異常がある場合：不合格	SVC-111、SVC-112、SVC-113	1	SSH	node1	pvecm status	CONTAINS(Quorate) && CONTAINS(pve-cl01-node01) && CONTAINS(pve-cl01-node02) && CONTAINS(pve-cl01-node03)
+クラスター機能テスト	CL-102	Proxmoxノード1のCeph状態確認	"1. ノード1にログインする
+2. 'ceph status'コマンドを実行する"	CephクラスタがHEALTH_OK状態であること	CephクラスタがHEALTH_OKの場合：合格、警告またはエラーがある場合：不合格	SVC-101、SVC-102、SVC-103	1	SSH	node1	ceph status	CONTAINS(HEALTH_OK)
+アクセステスト	ACC-101	Proxmoxノード1へのWebコンソールアクセス確認	"1. Webブラウザで https://10.200.20.30:8006 にアクセスする
+2. 管理者アカウントでログインを試みる"	Webインターフェースが表示され、ログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-101、SVC-101	1	API	node1	GET /nodes/pve-cl01-node01/status/current	"JSON_CONTAINS(status,running)"
+アクセステスト	ACC-102	Proxmoxノード2へのWebコンソールアクセス確認	"1. Webブラウザで https://10.200.20.31:8006 にアクセスする
+2. 管理者アカウントでログインを試みる"	Webインターフェースが表示され、ログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-102、SVC-102	1	API	node2	GET /nodes/pve-cl01-node02/status/current	"JSON_CONTAINS(status,running)"
+アクセステスト	ACC-103	Proxmoxノード3へのWebコンソールアクセス確認	"1. Webブラウザで https://10.200.20.32:8006 にアクセスする
+2. 管理者アカウントでログインを試みる"	Webインターフェースが表示され、ログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-103、SVC-103	1	API	node3	GET /nodes/pve-cl01-node03/status/current	"JSON_CONTAINS(status,running)"
+アクセステスト	ACC-104	ProxmoxBackupServerへのWebコンソールアクセス確認	"1. Webブラウザで https://192.168.242.10:8007 にアクセスする
+2. 管理者アカウントでログインを試みる"	Webインターフェースが表示され、ログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-104、SVC-121	1	API+SSH	backup	"curl -k -s -o /dev/null -w ""%{http_code}"" https://192.168.242.10:8007"	CONTAINS(200)
+アクセステスト	ACC-111	Proxmoxノード1へのSSHアクセス確認	"1. クライアントからノード1にSSH接続を試みる
+   ssh proxmox-tester@10.200.20.30
+2. パスワードまたは公開鍵でログインする"	SSHでの接続およびログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-101	1	SSH	node1	whoami	CONTAINS(proxmox-tester)
+アクセステスト	ACC-112	Proxmoxノード2へのSSHアクセス確認	"1. クライアントからノード2にSSH接続を試みる
+   ssh proxmox-tester@10.200.20.31
+2. パスワードまたは公開鍵でログインする"	SSHでの接続およびログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-102	1	SSH	node2	whoami	CONTAINS(proxmox-tester)
+アクセステスト	ACC-113	Proxmoxノード3へのSSHアクセス確認	"1. クライアントからノード3にSSH接続を試みる
+   ssh proxmox-tester@10.200.20.32
+2. パスワードまたは公開鍵でログインする"	SSHでの接続およびログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-103	1	SSH	node3	whoami	CONTAINS(proxmox-tester)
+アクセステスト	ACC-114	ProxmoxBackupServerへのSSHアクセス確認	"1. クライアントからバックアップサーバーにSSH接続を試みる
+   ssh proxmox-tester@192.168.242.10
+2. パスワードまたは公開鍵でログインする"	SSHでの接続およびログインが成功すること	ログインが正常に完了した場合：合格、ログインに失敗した場合：不合格	NET-104	1	SSH	backup	whoami	CONTAINS(proxmox-tester)
+ハードウェアテスト	HW-131	Proxmoxノード1のCephストレージ確認	"1. ノード1にログインする
+2. 'ceph osd tree'コマンドを実行する
+3. OSDの数と状態を確認する"	6つのOSDが正常状態(up)であること	すべてのOSDが正常状態の場合：合格、一部またはすべてが異常状態の場合：不合格	CL-102	2	SSH	node1	ceph osd tree	CONTAINS(up) && REGEX(osd.[0-5].*up)
+ハードウェアテスト	HW-132	Proxmoxノード2のCephストレージ確認	"1. ノード2にログインする
+2. 'ceph osd tree'コマンドを実行する
+3. OSDの数と状態を確認する"	6つのOSDが正常状態(up)であること	すべてのOSDが正常状態の場合：合格、一部またはすべてが異常状態の場合：不合格	CL-102	2	SSH	node2	ceph osd tree	CONTAINS(up) && REGEX(osd.[0-5].*up)
+ハードウェアテスト	HW-133	Proxmoxノード3のCephストレージ確認	"1. ノード3にログインする
+2. 'ceph osd tree'コマンドを実行する
+3. OSDの数と状態を確認する"	6つのOSDが正常状態(up)であること	すべてのOSDが正常状態の場合：合格、一部またはすべてが異常状態の場合：不合格	CL-102	2	SSH	node3	ceph osd tree	CONTAINS(up) && REGEX(osd.[0-5].*up)
+ストレージテスト	ST-201	Cephプール設定確認	"1. ノードにSSH接続する
+2. ceph osd pool ls detail コマンドを実行する
+3. 各プールのsize, min_size設定を確認する"	プールの設定が設計書通りになっていること(レプリカ数など)	設計通りの設定が確認できた場合：合格、設定が不一致の場合：不合格	CL-102	2	SSH	node1	ceph osd pool ls detail	CONTAINS(size 3) && CONTAINS(min_size 2)
+ストレージテスト	ST-202	Ceph配置グループ状態確認	"1. ノードにSSH接続する
+2. ceph pg stat コマンドを実行する
+3. PGの状態を確認する"	全てのPGが「active+clean」状態であること	全PGが正常状態の場合：合格、一部でも異常状態がある場合：不合格	CL-102	2	SSH	node1	ceph pg stat	CONTAINS(active+clean)
+ストレージテスト	ST-203	CephFSのマウント状態と冗長性確認	"1. 全ノードでCephFSがマウントされていることを確認
+2. 一つのCephモニターをオフラインにしてもCephFSがアクセス可能か確認
+3. 複数のノードから同時にCephFSへファイル書き込みを行い整合性確認"	すべてのノードでCephFSが正常にマウントされ、モニター障害時も継続してアクセス可能であること	CephFSがすべてのテストで正常に動作した場合：合格、問題が発生した場合：不合格	CL-102	2	SSH	node1	mount | grep ceph	CONTAINS(ceph) && CONTAINS(type ceph)
+VM基本機能テスト	VM-201	仮想マシンの作成と起動	Proxmox GUIまたはCLIを使用して、新規の仮想マシンを作成する。OSイメージを選択し、適切なリソース (CPU、メモリ、ディスク) を割り当てる。作成した仮想マシンを起動する。	仮想マシンがエラーなく起動し、コンソールにアクセスできること。	仮想マシンが正常に起動し、コンソールへのアクセスが確認できた場合：合格、起動に失敗した場合：不合格	ACC-101	2	API	node1	POST /nodes/pve-cl01-node01/qemu	"JSON_CONTAINS(vmid,[0-9]+)"
+VM基本機能テスト	VM-202	仮想マシンの停止と削除	起動中の仮想マシンをGUIまたはCLIから正常に停止する。停止した仮想マシンをGUIまたはCLIから削除する。	仮想マシンがエラーなく停止し、削除されたことを確認できること。	仮想マシンが正常に停止し、GUI/CLIから削除されたことを確認できた場合：合格、停止または削除に失敗した場合：不合格	VM-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/status/stop	"JSON_CONTAINS(status,stopped)"
+VM基本機能テスト	VM-203	コンテナの作成と起動	Proxmox GUIまたはCLIを使用して、新規のコンテナを作成する。適切なテンプレートを選択し、リソースを割り当てる。作成したコンテナを起動する。	コンテナがエラーなく起動し、コンソールにアクセスできること。	コンテナが正常に起動し、コンソールへのアクセスが確認できた場合：合格、起動に失敗した場合：不合格	ACC-101	2	API	node1	POST /nodes/pve-cl01-node01/lxc	"JSON_CONTAINS(vmid,[0-9]+)"
+VM基本機能テスト	VM-204	コンテナの停止と削除	起動中のコンテナをGUIまたはCLIから正常に停止する。停止したコンテナをGUIまたはCLIから削除する。	コンテナがエラーなく停止し、削除されたことを確認できること。	コンテナが正常に停止し、GUI/CLIから削除されたことを確認できた場合：合格、停止または削除に失敗した場合：不合格	VM-203	2	API	node1	POST /nodes/pve-cl01-node01/lxc/{vmid}/status/stop	"JSON_CONTAINS(status,stopped)"
+VM基本機能テスト	VM-211	VMのCPU追加操作確認	"1. 仮想マシンを作成し起動する
+2. 初期状態のCPU数を確認する
+3. GUIまたはCLIからCPU数を増やす（例：1→2）"	CPU数の追加操作がエラーなく成功すること	CPU数追加操作が正常に完了した場合：合格、操作に失敗した場合：不合格	VM-201	2	API	node1	PUT /nodes/pve-cl01-node01/qemu/{vmid}/config	"JSON_CONTAINS(data.sockets,2)"
+VM基本機能テスト	VM-212	VMのCPU追加後の動作確認	"1. CPU数を追加させたVMで
+2. OSを起動し、システム情報を確認する"	追加後、VMが正常に動作し、OSが追加されたCPUを認識すること	OSが追加CPUを正しく認識している場合：合格、認識していない場合：不合格	VM-211	2	API+SSH	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/status/current	"JSON_CONTAINS(data.cpus,2)"
+VM基本機能テスト	VM-213	VMのCPU減少操作確認	"1. 複数CPUが割り当てられたVMで
+2. GUIまたはCLIからCPU数を減らす（例：2→1）"	CPU数の減少操作がエラーなく成功すること	CPU数減少操作が正常に完了した場合：合格、操作に失敗した場合：不合格	VM-212	2	API	node1	PUT /nodes/pve-cl01-node01/qemu/{vmid}/config	"JSON_CONTAINS(data.sockets,1)"
+VM基本機能テスト	VM-214	VMのCPU減少後の動作確認	"1. CPU数を減少させたVMで
+2. OSを起動し、システム動作を確認する"	減少後、VMが正常に動作すること	VM動作に問題がない場合：合格、動作不安定の場合：不合格	VM-213	2	API+SSH	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/status/current	"JSON_CONTAINS(data.cpus,1)"
+VM基本機能テスト	VM-221	VMのメモリ追加操作確認	"1. 仮想マシンを作成し起動する
+2. GUIまたはCLIからメモリ容量を増やす（例：2GB→4GB）"	メモリ容量の追加操作がエラーなく成功すること	メモリ追加操作が正常に完了した場合：合格、操作に失敗した場合：不合格	VM-201	2	API	node1	PUT /nodes/pve-cl01-node01/qemu/{vmid}/config	"JSON_CONTAINS(data.memory,4096)"
+VM基本機能テスト	VM-222	VMのメモリ追加後の動作確認	"1. メモリ容量を追加させたVMで
+2. OSを起動し、システム情報を確認する"	追加後、VMが正常に動作し、OSが追加されたメモリを認識すること	OSが追加メモリを正しく認識している場合：合格、認識していない場合：不合格	VM-221	2	API+SSH	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/status/current	"JSON_CONTAINS(data.ballooninfo.total,4194304)"
+VM基本機能テスト	VM-223	VMのメモリ減少操作確認	"1. 十分なメモリが割り当てられたVMで
+2. GUIまたはCLIからメモリ容量を減らす（例：4GB→2GB）"	メモリ容量の減少操作がエラーなく成功すること	メモリ減少操作が正常に完了した場合：合格、操作に失敗した場合：不合格	VM-222	2	API	node1	PUT /nodes/pve-cl01-node01/qemu/{vmid}/config	"JSON_CONTAINS(data.memory,2048)"
+VM基本機能テスト	VM-224	VMのメモリ減少後の動作確認	"1. メモリ容量を減少させたVMで
+2. OSを起動し、システム動作を確認する"	減少後、VMが正常に動作すること	VM動作に問題がない場合：合格、動作不安定の場合：不合格	VM-223	2	API+SSH	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/status/current	"JSON_CONTAINS(data.ballooninfo.total,2097152)"
+VM基本機能テスト	VM-231	VMへの新規ディスク追加確認	"1. 仮想マシンを作成し起動する
+2. GUIまたはCLIから新規ディスクを追加する"	ディスク追加操作がエラーなく成功すること	ディスク追加操作が正常に完了した場合：合格、操作に失敗した場合：不合格	VM-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/config	"JSON_CONTAINS(data,scsi1)"
+VM基本機能テスト	VM-232	VMの新規ディスク認識確認	"1. 新規ディスクを追加したVMで
+2. OSを起動し、ディスク認識状況を確認する"	OSが新規追加されたディスクを正しく認識すること	OSが新規ディスクを認識している場合：合格、認識していない場合：不合格	VM-231	2	API+SSH	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/config	CONTAINS(scsi1)
+VM基本機能テスト	VM-233	VMの既存ディスク拡張操作確認	"1. 既存ディスクを持つVMで
+2. GUIまたはCLIから既存ディスクのサイズを拡張する"	ディスク拡張操作がエラーなく成功すること	ディスク拡張操作が正常に完了した場合：合格、操作に失敗した場合：不合格	VM-201	2	API	node1	PUT /nodes/pve-cl01-node01/qemu/{vmid}/resize	"JSON_CONTAINS(data.size,+10G)"
+VM基本機能テスト	VM-234	VMの拡張ディスク認識確認	"1. ディスクを拡張したVMで
+2. OSを起動し、ディスク容量の変更を確認する"	OSが拡張されたディスク容量を正しく認識すること	OSが拡張容量を認識している場合：合格、認識していない場合：不合格	VM-233	2	API+SSH	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/config	REGEX(size=[0-9]+G)
+VM基本機能テスト	VM-235	VMのディスク削除操作確認	"1. 複数ディスクを持つVMで
+2. GUIまたはCLIから追加したディスクを削除する"	ディスク削除操作がエラーなく成功すること	ディスク削除操作が正常に完了した場合：合格、操作に失敗した場合：不合格	VM-231	2	API	node1	DELETE /nodes/pve-cl01-node01/qemu/{vmid}/config	!CONTAINS(scsi1)
+VM機能テスト	VM-301	ライブマイグレーション機能確認	"1. 稼働中のVMを選択する
+2. Webコンソールでマイグレーションウィザードを開く
+3. 移行先ノードを選択しライブマイグレーションを実行する
+4. VMの稼働状態を継続監視する"	VMが稼働状態を維持したまま、ダウンタイムほぼゼロで別ノードに移行すること	ダウンタイムなしでマイグレーションが完了した場合：合格、接続断や異常終了があった場合：不合格	VM-201、CL-101	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/migrate	"JSON_CONTAINS(status,migrated)"
+VM機能テスト	VM-302	コールドマイグレーション機能確認	"1. 停止状態のVMを選択する
+2. Webコンソールでマイグレーションウィザードを開く
+3. 移行先ノードを選択しマイグレーションを実行する
+4. 移行後にVMを起動する"	停止中のVMが別ノードに正常に移行し、移行先で問題なく起動すること	移行と起動が正常に完了した場合：合格、移行失敗または起動不能の場合：不合格	VM-201、CL-101	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/migrate	"JSON_CONTAINS(status,migrated)"
+VM機能テスト	VM-303	VMクローン作成機能確認	"1. 既存VMを選択する
+2. クローンオプションで「フルクローン」を選択して実行する
+3. 再度クローンオプションで「リンククローン」を選択して実行する
+4. 両クローンを起動し動作確認する"	フルクローンとリンククローンが正常に作成され、独立して動作すること	両方のクローンが問題なく動作した場合：合格、作成失敗または異常動作の場合：不合格	VM-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/clone	"JSON_CONTAINS(data.target-vmid,[0-9]+)"
+VM機能テスト	VM-304	VMテンプレート機能確認	"1. 既存VMを選択し、テンプレート変換を実行する
+2. 作成したテンプレートから新規VMをデプロイする
+3. デプロイしたVMを起動し機能確認する"	テンプレートが正常に作成され、そこから新規VMが展開できること	テンプレート作成とデプロイが成功した場合：合格、失敗した場合：不合格	VM-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/template	"JSON_CONTAINS(success,1)"
+VM機能テスト	VM-305	VMリソース制限機能確認	"1. VMのCPU/メモリ制限を設定する
+2. VM内で高負荷処理を実行する(stressコマンドなど)
+3. ホスト側でリソース使用状況を監視する"	設定した制限に従ってリソース使用が制限されること	リソース制限が適切に機能した場合：合格、制限を超過または正しく適用されない場合：不合格	VM-201	2	API	node1	PUT /nodes/pve-cl01-node01/qemu/{vmid}/config	"JSON_CONTAINS(data.cpulimit,0.5)"
+ネットワークテスト	NET-201	仮想マシン間のネットワーク疎通	異なるノードに仮想マシンをそれぞれ作成し、同じネットワークセグメントに接続する。一方の仮想マシンから他方の仮想マシンへpingコマンドを実行する。	pingコマンドが正常に応答すること。	バックアップが正常に完了し、PBSにデータが保存されていることを確認できた場合：合格、バックアップに失敗した場合：不合格	VM-201	2	SSH	node1	ping -c 3 <VM_IP>	"CONTAINS(3 packets transmitted, 3 received, 0% packet loss)"
+ネットワークテスト	NET-202	仮想マシンから外部ネットワークへの疎通	仮想マシンから外部の既知のIPアドレス (例: 8.8.8.8) へpingコマンドを実行する。	pingコマンドが正常に応答すること。	リストアが正常に完了し、VMが元の状態に戻ったことを確認できた場合：合格、リストアに失敗した場合：不合格	VM-201	2	SSH	node1	ping -c 3 8.8.8.8	"CONTAINS(3 packets transmitted, 3 received, 0% packet loss)"
+ネットワークテスト	NET-203	VLAN設定の確認	異なるVLANに属する仮想マシンを作成し、それぞれのVLAN内で通信できること、異なるVLAN間では意図的に通信できないことを確認する。	VLAN設計に基づいたネットワーク分離が実現できていること。	測定値が目標値を満たした場合：合格、満たさない場合：不合格	VM-201	2	SSH	node1	ip -d link show	CONTAINS(vlan protocol 802.1q)
+ネットワークテスト	NET-211	VMネットワーク接続モード確認	"1. WebコンソールでVMの設定を開く
+2. ネットワークタブで接続情報を確認する
+3. vmbr0などのブリッジ設定を確認する"	VMが設計通りのブリッジインターフェースに接続されていること	設計通りの接続が確認できた場合：合格、設計と異なる場合：不合格	VM-201	2	API	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/config	CONTAINS(bridge=vmbr0)
+ネットワークテスト	NET-212	ファイアウォールルール動作確認	"1. Webコンソールでファイアウォールルールを設定する
+2. 特定ポート(例:8080)へのアクセス許可/拒否を設定する
+3. 外部からのアクセスをテストする"	設定したルールに従ってアクセス制御が正しく機能すること	ルール通りにアクセス制御が機能した場合：合格、意図しないアクセスが可能または拒否された場合：不合格	VM-201	2	API+SSH	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/firewall/rules	"JSON_CONTAINS(pos,1)"
+ネットワークテスト	NET-221	Corosyncネットワークの疎通と冗長性	"1. 各ノードから他のノードへCorosyncの通信が正常に行われていることを確認する (`pvecm status`コマンドなど)
+2. 意図的にCorosyncネットワークのリンクを一つ停止させ、クラスターが正常に動作し続けることを確認する"	全てのノードが正常にクラスターに参加しており、リンク障害発生後もクラスターが安定して動作すること。	全ノードが正常に参加し、リンク障害後も`pvecm status`が正常な状態を示す場合：合格、ノードが離脱したり、クラスターが不安定になった場合：不合格	CL-101	2	SSH	node1	pvecm status	CONTAINS(Quorate) && CONTAINS(pve-cl01-node01) && CONTAINS(pve-cl01-node02) && CONTAINS(pve-cl01-node03)
+ネットワークテスト	NET-222	Cephネットワークの疎通	Ceph MonitorおよびOSD間の通信が正常に行われていることを確認する (`ceph status`コマンドなど)。	CephクラスターがHEALTH_OKのステータスであること。	不要なサービスが停止している場合：合格、不要なサービスが稼動している場合：不合格	CL-102	2	SSH	node1	ceph status	CONTAINS(HEALTH_OK)
+バックアップテスト	BK-201	仮想マシンのバックアップ	Proxmox GUIまたはCLIから、稼動中の仮想マシンのバックアップジョブを実行する。Proxmox Backup Serverにバックアップデータが保存されていることを確認する。	仮想マシンのバックアップがエラーなく完了し、Proxmox Backup Serverにデータが保存されていること。	バックアップが正常に完了し、PBSにデータが保存されていることを確認できた場合：合格、バックアップに失敗した場合：不合格	VM-201、SVC-121	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/backup	"JSON_CONTAINS(data.id,backup)"
+バックアップテスト	BK-202	仮想マシンのリストア	バックアップした仮想マシンをProxmox GUIまたはCLIからリストアする。リストアされた仮想マシンが正常に起動し、元の状態に戻っていることを確認する。	仮想マシンがエラーなくリストアされ、データが保持されていること。	リストアが正常に完了し、VMが元の状態に戻ったことを確認できた場合：合格、リストアに失敗した場合：不合格	BK-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/restore	"JSON_CONTAINS(data.id,restore)"
+バックアップテスト	BK-203	バックアップスケジュール検証	"1. VMイメージの日次バックアップスケジュールを設定
+2. Cephスナップショットの週次スケジュールを設定
+3. スケジュール実行を待機または時刻を調整して実行を確認
+4. 成功ログと保持期間の確認"	スケジュールされたバックアップとスナップショットが自動的に実行され、指定した保持期間に従って管理されること	スケジュールが正常に実行された場合：合格、実行されなかった場合：不合格	BK-201	2	API	node1	GET /cluster/backup	CONTAINS(schedule)
+バックアップテスト	BK-211	フル/増分バックアップ機能確認	"1. 対象VMのフルバックアップを実行する
+2. VMにデータ変更を加える
+3. 増分バックアップを実行する
+4. 両方のバックアップポイントからリストアをテストする"	フルバックアップと増分バックアップが正常に完了し、各時点の状態を正確にリストアできること	両方のバックアップ/リストアが成功した場合：合格、いずれかが失敗した場合：不合格	BK-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/backup	"JSON_CONTAINS(data.type,full)"
+バックアップテスト	BK-212	異なる設定へのリストア確認	"1. VMのバックアップを取得する
+2. リストア時に別名称/別IPアドレスを指定する
+3. リストアを実行し起動確認する"	バックアップから異なる設定で新規VMをリストアできること	異なる設定での正常リストアが確認できた場合：合格、設定変更ができないまたはエラーが発生した場合：不合格	BK-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/restore	"JSON_CONTAINS(data.id,restore)"
+バックアップテスト	BK-213	バックアップスケジュール機能確認	"1. 日次/週次バックアップジョブを設定する
+2. 時刻を一時的に調整してスケジュール実行をテストする
+3. ジョブ実行ログを確認する"	設定したスケジュール通りにバックアップジョブが自動実行されること	スケジュール通りに実行された場合：合格、実行されないか異常終了した場合：不合格	BK-201	2	API	node1	PUT /cluster/backup/{id}	"JSON_CONTAINS(data.schedule,""0 0 * * *"")"
+バックアップテスト	BK-214	バックアップデータ整合性確認	"1. PBSのWebインターフェースにアクセスする
+2. 保存済みバックアップの整合性チェックを実行する
+3. 結果を確認する"	バックアップデータに破損がなく整合性が保たれていること	整合性チェックが成功した場合：合格、データ破損が検出された場合：不合格	BK-201	2	SSH	backup	proxmox-backup-manager catalog check	CONTAINS(OK)
+スナップショットテスト	SN-201	VM(Windows Server)のスナップショット作成と復元確認	"1. Windows Server 2019を実行している仮想マシン(VM1)を起動する
+2. VM1のデスクトップに新規ファイル(test.txt)を作成する
+3. VM1のスナップショット[VM1-snapshot]を取得する
+4. VM1のデスクトップに追加ファイル(test2.txt)を作成する
+5. 取得済みのスナップショット[VM1-snapshot]に復元する
+6. VM1の状態を確認する"	VM1が正常に復元され、デスクトップにはtest.txtのみが存在し、test2.txtが存在しないこと	pingコマンドが正常に応答した場合：合格、応答がない場合：不合格	VM-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/snapshot	"JSON_CONTAINS(data.name,VM1-snapshot)"
+スナップショットテスト	SN-202	VM(Linux)のスナップショット作成と復元確認	"1. Linuxを実行している仮想マシン(VM2)を起動する
+2. VM2のホームディレクトリに新規ファイル(test.txt)を作成する
+3. VM2のスナップショット[VM2-snapshot]を取得する
+4. VM2のファイルシステムを変更（新規ファイル作成、設定変更など）
+5. 取得済みのスナップショット[VM2-snapshot]に復元する
+6. VM2の状態を確認する"	VM2が正常に復元され、スナップショット取得時点の状態に戻っていること（ファイル変更が元に戻っていること）	pingコマンドが正常に応答した場合：合格、応答がない場合：不合格	VM-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/snapshot	"JSON_CONTAINS(data.name,VM2-snapshot)"
+スナップショットテスト	SN-203	実行中VMのスナップショット動作確認	"1. 仮想マシン(VM3)を起動する
+2. 実行中の状態でVM3のスナップショットを取得する
+3. VM3で作業を継続（ファイル作成など）
+4. 取得したスナップショットに復元する"	実行中のVMからのスナップショット取得が正常に完了し、VMは中断なく動作し続けること。復元後は保存された実行状態に戻ること	同じVLAN内のVM間で通信可能、異なるVLAN間のVMで通信不可の場合：合格、意図しない通信または通信不可が発生した場合：不合格	VM-201	2	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/snapshot	"JSON_CONTAINS(data.name,VM3-snapshot)"
+スナップショットテスト	SN-204	複数世代スナップショットの管理確認	"1. 仮想マシン(VM4)を起動する
+2. 初期状態でスナップショット[snapshot-1]を取得する
+3. 変更Aを加えてスナップショット[snapshot-2]を取得する
+4. 変更Bを加えてスナップショット[snapshot-3]を取得する
+5. [snapshot-1]に復元し、状態を確認する
+6. [snapshot-3]に復元し、状態を確認する"	複数世代のスナップショットが正常に管理され、任意のポイントに復元できること。復元後はそれぞれのスナップショット時点の状態に正確に戻ること	全ノードが正常に参加し、リンク障害後も`pvecm status`が正常な状態を示す場合：合格、ノードが離脱したり、クラスターが不安定になった場合：不合格	VM-201	3	API	node1	GET /nodes/pve-cl01-node01/qemu/{vmid}/snapshot	CONTAINS(snapshot-1) && CONTAINS(snapshot-2) && CONTAINS(snapshot-3)
+スナップショットテスト	SN-205	スナップショットからのクローン作成確認	"1. 仮想マシン(VM5)を起動し、初期設定を行う
+2. VM5のスナップショット[VM5-snapshot]を取得する
+3. 取得したスナップショットからクローンVM(VM5-clone)を作成する
+4. クローンVMを起動し、元のVMとクローンVMの独立性を確認する（一方を変更しても他方に影響がないこと）"	スナップショットからクローンが正常に作成され、元VMとクローンVMが独立して動作すること	`ceph status`がHEALTH_OKを示す場合：合格、HEALTH_WARNまたはHEALTH_ERRを示す場合：不合格	SN-201	3	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/clone	"JSON_CONTAINS(data.target-vmid,[0-9]+)"
+スナップショットテスト	SN-206	アプリケーション実行中のVM復元確認	"1. データベースサーバー（例：SQL Server）を実行しているVM(VM6)を起動する
+2. データベースにテストデータを投入する
+3. VM6のスナップショット[VM6-snapshot]を取得する
+4. データベースに追加のデータを投入する
+5. 取得済みのスナップショット[VM6-snapshot]に復元する
+6. データベースの状態を確認する"	データベースがスナップショット取得時点の状態に正確に復元され、追加データが存在しないこと。アプリケーションが正常に起動・動作すること	ファイルの作成、書き込み、読み込みが正常に完了した場合：合格、エラーが発生した場合：不合格	SN-201	3	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/snapshot/{snapname}/rollback	"JSON_CONTAINS(success,1)"
+シャットダウンテスト	SHUT-201	Proxmoxノード1のGUIからのシャットダウン確認	"1. Webコンソールでノードにアクセスする
+2. ノード1を選択し、シャットダウンオプションを実行する"	ノード1が正常にシャットダウンすること	シャットダウンが正常に完了した場合：合格、失敗した場合：不合格	ACC-101	3	手動	node1	N/A	N/A
+シャットダウンテスト	SHUT-202	Proxmoxノード2のGUIからのシャットダウン確認	"1. Webコンソールでノードにアクセスする
+2. ノード2を選択し、シャットダウンオプションを実行する"	ノード2が正常にシャットダウンすること	シャットダウンが正常に完了した場合：合格、失敗した場合：不合格	ACC-101	3	手動	node2	N/A	N/A
+シャットダウンテスト	SHUT-203	Proxmoxノード3のGUIからのシャットダウン確認	"1. Webコンソールでノードにアクセスする
+2. ノード3を選択し、シャットダウンオプションを実行する"	ノード3が正常にシャットダウンすること	シャットダウンが正常に完了した場合：合格、失敗した場合：不合格	ACC-101	3	手動	node3	N/A	N/A
+シャットダウンテスト	SHUT-211	Proxmoxノード1のCLIからのシャットダウン確認	"1. SSHでノード1にログインする
+2. 'shutdown -h now'コマンドを実行する"	ノード1が正常にシャットダウンすること	シャットダウンが正常に完了した場合：合格、失敗した場合：不合格	ACC-111	3	手動	node1	N/A	N/A
+シャットダウンテスト	SHUT-212	Proxmoxノード2のCLIからのシャットダウン確認	"1. SSHでノード2にログインする
+2. 'shutdown -h now'コマンドを実行する"	ノード2が正常にシャットダウンすること	シャットダウンが正常に完了した場合：合格、失敗した場合：不合格	ACC-112	3	手動	node2	N/A	N/A
+シャットダウンテスト	SHUT-213	Proxmoxノード3のCLIからのシャットダウン確認	"1. SSHでノード3にログインする
+2. 'shutdown -h now'コマンドを実行する"	ノード3が正常にシャットダウンすること	シャットダウンが正常に完了した場合：合格、失敗した場合：不合格	ACC-113	3	手動	node3	N/A	N/A
+電源テスト	POW-301	Proxmoxノード1の電源系統1障害テスト	"1. ノード1の電源系統1を意図的に切断する（電源ケーブルを抜く）
+2. サーバーの動作状態を確認する
+3. 切断した電源ケーブルを再接続する"	電源系統1を切断してもサーバーが停止せず、正常に動作し続けること	サーバーが動作を継続した場合：合格、停止した場合：不合格	POW-101	3	手動	node1	N/A	N/A
+電源テスト	POW-302	Proxmoxノード2の電源系統1障害テスト	"1. ノード2の電源系統1を意図的に切断する（電源ケーブルを抜く）
+2. サーバーの動作状態を確認する
+3. 切断した電源ケーブルを再接続する"	電源系統1を切断してもサーバーが停止せず、正常に動作し続けること	サーバーが動作を継続した場合：合格、停止した場合：不合格	POW-102	3	手動	node2	N/A	N/A
+電源テスト	POW-303	Proxmoxノード3の電源系統1障害テスト	"1. ノード3の電源系統1を意図的に切断する（電源ケーブルを抜く）
+2. サーバーの動作状態を確認する
+3. 切断した電源ケーブルを再接続する"	電源系統1を切断してもサーバーが停止せず、正常に動作し続けること	サーバーが動作を継続した場合：合格、停止した場合：不合格	POW-103	3	手動	node3	N/A	N/A
+電源テスト	POW-311	Proxmoxノード1の電源系統2障害テスト	"1. ノード1の電源系統2を意図的に切断する（電源ケーブルを抜く）
+2. サーバーの動作状態を確認する
+3. 切断した電源ケーブルを再接続する"	電源系統2を切断してもサーバーが停止せず、正常に動作し続けること	サーバーが動作を継続した場合：合格、停止した場合：不合格	POW-101	3	手動	node1	N/A	N/A
+電源テスト	POW-312	Proxmoxノード2の電源系統2障害テスト	"1. ノード2の電源系統2を意図的に切断する（電源ケーブルを抜く）
+2. サーバーの動作状態を確認する
+3. 切断した電源ケーブルを再接続する"	電源系統2を切断してもサーバーが停止せず、正常に動作し続けること	サーバーが動作を継続した場合：合格、停止した場合：不合格	POW-102	3	手動	node2	N/A	N/A
+電源テスト	POW-313	Proxmoxノード3の電源系統2障害テスト	"1. ノード3の電源系統2を意図的に切断する（電源ケーブルを抜く）
+2. サーバーの動作状態を確認する
+3. 切断した電源ケーブルを再接続する"	電源系統2を切断してもサーバーが停止せず、正常に動作し続けること	サーバーが動作を継続した場合：合格、停止した場合：不合格	POW-103	3	手動	node3	N/A	N/A
+ストレージテスト	ST-301	仮想マシンからのCephストレージへの書き込みと読み込み	CephストレージUに仮想マシンのディスクを作成し、仮想マシン内でファイルの作成、書き込み、読み込みを行う。	ファイルの作成、書き込み、読み込みがエラーなく行えること。	意図したポートへのアクセス制御が確認できた場合：合格、意図しないアクセスが可能または拒否された場合：不合格	VM-201、CL-102	3	SSH	node1	dd if=/dev/zero of=/mnt/cephfs/testfile bs=1M count=100 && md5sum /mnt/cephfs/testfile	CONTAINS(100+0) && REGEX([0-9a-f]{32})
+ストレージテスト	ST-302	Cephストレージの性能測定	仮想マシン内でfioなどのベンチマークツールを使用して、CephストレージのIOPS、スループット、レイテンシなどを測定する。	測定された性能値が事前に設定した目標値を満たしていること。	測定値が目標値を満たした場合：合格、満たさない場合：不合格	VM-201、CL-102	3	SSH	node1	fio --name=test --rw=randread --size=1G --bs=4k --runtime=30 --output-format=json	"REGEX(""iops"".*[0-9]+)"
+ストレージテスト	ST-303	Ceph OSDの障害テスト	"1. 意図的に一つのCeph OSDを停止させる (物理ディスクを取り外す、サービスを停止するなど)
+2. 仮想マシンからCephストレージへのデータの読み書きを継続し、エラーが発生しないことを確認する
+3. 停止させたOSDを復旧させる"	OSD障害発生時でもデータアクセスが継続でき、復旧後にCephクラスターが正常な状態に戻ること。	障害発生時もデータアクセス可能で、復旧後にCephが正常状態に戻った場合：合格、データアクセスに失敗したり、Cephがエラー状態のままの場合：不合格	CL-102	3	手動	node1	N/A	N/A
+ストレージテスト	ST-311	複数Cephモニタ障害テスト	"1. 2台のモニタノードをシャットダウンまたはサービス停止する
+2. ceph status で状態を確認する
+3. データアクセス可否を確認する
+4. モニタを復旧させる"	2モニタ障害時でもクラスターが読み取りアクセスを継続でき、復旧後に完全に正常化すること	障害中も読み取りアクセス可能で復旧後に正常化した場合：合格、完全に機能停止した場合：不合格	CL-102	3	手動	node1	N/A	N/A
+ストレージテスト	ST-312	Cephマネージャ障害テスト	"1. アクティブなCephマネージャを停止する
+2. ceph status で状態を確認する
+3. データアクセス可否を確認する
+4. マネージャを復旧させる"	マネージャ障害時でもCephクラスターの基本機能が維持され、復旧後に正常に戻ること	基本機能が維持され復旧がスムーズだった場合：合格、機能停止や復旧失敗の場合：不合格	CL-102	3	SSH	node1	systemctl stop ceph-mgr@$(hostname -s) && sleep 5 && systemctl start ceph-mgr@$(hostname -s) && sleep 10 && ceph status	CONTAINS(HEALTH_OK)
+クラスター機能テスト	CL-301	Proxmoxノードの障害テスト	"1. HA設定された仮想マシンが稼動しているノードを意図的に停止させる (電源断など)
+2. 別のノードで仮想マシンが自動的に起動することを確認する"	障害発生ノード上の仮想マシンが、別のノードで自動的に起動し、サービスが継続できること。	HA機能が正常に動作し、VMが自動フェイルオーバーした場合：合格、フェイルオーバーに失敗した場合：不合格	CL-101	3	手動	node1	N/A	N/A
+クラスター機能テスト	CL-302	クォーラム喪失時の動作確認	"1. 意図的に過半数のノードを停止させ、クラスターの動作状況を確認する
+2. 残るノードの動作を検証する"	クォーラムを喪失したノードでは仮想マシンの操作などが制限されること (設定による)。	クォーラム喪失時に意図した動作 (操作制限など) が確認できた場合：合格、意図しない動作が発生した場合：不合格	CL-101	3	手動	node1	N/A	N/A
+クラスター機能テスト	CL-303	クラスターへのノード追加と削除テスト	"1. テスト環境に新規Proxmoxノードをセットアップする
+2. pvecm add コマンドで既存クラスターに追加する
+3. クラスター状態を確認する
+4. pvecm removeで追加したノードを削除する"	ノードの追加と削除がエラーなく完了し、クラスター状態が正常に維持されること	追加と削除が正常に完了した場合：合格、エラーが発生した場合：不合格	CL-101	3	手動	node1	N/A	N/A
+クラスター機能テスト	CL-304	クラスター設定の同期確認	"1. 任意のノードでクラスター設定を変更する
+2. 数分待機する
+3. 他のノードで設定が反映されているか確認する"	変更した設定が全てのノードに自動的に同期されること	全ノードに設定が同期された場合：合格、同期されない場合：不合格	CL-101	3	API+SSH	node1	POST /cluster/config/nodes/{node}/apply	"JSON_CONTAINS(success,1)"
+復旧テスト	RC-301	クォーラム喪失後の手動リカバリー検証	"1. 過半数のノードを同時停止させてクォーラム喪失状態を作る
+2. 残存ノードでpvecm expectedによるクォーラム調整を実施
+3. クラスター機能の復旧を確認
+4. すべてのノードを復帰させた後、正常クォーラム設定に戻す"	クォーラム喪失状態からの手動リカバリーが成功し、クラスター機能が正常に復旧すること	リカバリー手順が成功しクラスターが正常動作した場合：合格、リカバリーに失敗した場合：不合格	CL-101	3	手動	node1	N/A	N/A
+HA可用性テスト	HA-301	フェンシング機能検証	"1. 3ノードクラスターのネットワークを分断し意図的にスプリットブレイン状態を作る
+2. マイノリティ側のノードが自動的にフェンシングされるか確認
+3. フェンシング後のノード状態とリソース状態を確認"	クラスター分断時にマイノリティ側ノードが適切にフェンシングされ、スプリットブレイン状態が防止されること	フェンシングが正常に機能した場合：合格、スプリットブレインが発生した場合：不合格	CL-101	3	手動	node1	N/A	N/A
+監視テスト	MON-301	リソース使用率アラート確認	"1. アラート閾値を設定する(例:CPU使用率80%以上)
+2. VMで高負荷を発生させる
+3. アラート通知を確認する"	設定した閾値を超えた時に、指定した方法でアラートが通知されること	閾値超過時に正しくアラートが通知された場合：合格、通知なしまたは誤通知の場合：不合格	VM-201	3	手動	node1	N/A	N/A
+監視テスト	MON-302	ノードダウンアラート確認	"1. テスト対象ノードを計画的にシャットダウンする
+2. アラート通知を確認する
+3. ノードを再起動する"	ノードダウン時に適切なアラートが通知されること	適切なアラート通知が確認できた場合：合格、通知されない場合：不合格	SHUT-211	3	手動	node1	N/A	N/A
+監視テスト	MON-303	Cephヘルスステータスアラート確認	"1. 一部のCeph OSDを停止させる
+2. ceph statusでWARNINGまたはERROR状態を確認する
+3. アラート通知を確認する"	Cephヘルスステータスの変化が検知され、アラートが通知されること	ステータス変化時に適切なアラートが通知された場合：合格、通知されない場合：不合格	ST-303	3	手動	node1	N/A	N/A
+セキュリティテスト	SC-301	不要なサービスの停止確認	各Proxmoxノード上で稼動しているサービスの一覧を確認し、不要なサービスが停止していることを確認する。	必要なサービスのみが稼動していること。	不要なサービスが停止している場合：合格、不要なサービスが稼動している場合：不合格	SVC-101	3	SSH	node1	"systemctl list-units --type=service --state=running | grep -v ""pve\|ceph\|ssh\|systemd\|network"""	!CONTAINS(apache) && !CONTAINS(mysql)
+セキュリティテスト	SC-302	ユーザー権限機能確認	"1. 異なる権限レベルのユーザーアカウントを作成する
+2. 各アカウントでログインし、機能制限を確認する
+3. 非許可操作を試みる"	ユーザー権限に基づいて適切に操作が制限されること	権限通りにアクセス制御されている場合：合格、権限外の操作が可能な場合：不合格	ACC-101	3	API	node1	GET /access/roles	CONTAINS(Administrator) && CONTAINS(PVEVMUser)
+セキュリティテスト	SC-303	二要素認証機能確認	"1. テストユーザーで2FA設定を有効化する
+2. ログインを試行し認証フローを確認する
+3. 正しい/誤ったコードでの動作を確認する"	二要素認証が有効化され、認証コードなしでログインできないこと	正しいコードでのみログイン可能な場合：合格、認証をバイパスできる場合：不合格	SC-302	3	API	node1	PUT /access/tfa/{userid}	"JSON_CONTAINS(success,1)"
+セキュリティテスト	SC-304	ファイアウォール設定の確認	外部のネットワークから、許可されていないポートへのアクセスを試み、アクセスが拒否されることを確認する。許可されているポートへのアクセスが正常にできることを確認する。	ファイアウォールルールに基づいたアクセス制御が実現できていること。	意図したポートへのアクセス制御が確認できた場合：合格、意図しないアクセスが可能または拒否された場合：不合格	NET-212	3	SSH	node1	"curl -s -o /dev/null -w ""%{http_code}"" localhost:8006"	CONTAINS(200)
+性能テスト	PT-401	仮想マシンのCPU性能テスト	仮想マシン内でsysbenchなどのベンチマークツールを使用して、CPU性能を測定する。	測定されたCPU性能値が事前に設定した目標値を満たしていること。	測定値が目標値を満たした場合：合格、満たさない場合：不合格	VM-201	4	SSH	node1	sysbench --test=cpu --cpu-max-prime=20000 run	REGEX(total time:.*[0-9.]+s)
+性能テスト	PT-402	仮想マシンのメモリ性能テスト	仮想マシン内でmemtesterなどのツールを使用して、メモリの読み書き性能を測定する。	測定されたメモリ性能値が事前に設定した目標値を満たしていること。	測定値が目標値を満たした場合：合格、満たさない場合：不合格	VM-201	4	SSH	node1	dd if=/dev/zero of=/dev/shm/test bs=1M count=1024 conv=fdatasync	REGEX([0-9.]+ GB/s)
+スナップショットテスト	SN-401	スナップショット復元後のネットワーク設定確認	"1. 仮想マシン(VM7)を起動する
+2. 初期ネットワーク設定を記録する
+3. VM7のスナップショット[VM7-snapshot]を取得する
+4. ネットワーク設定を変更する（IPアドレス、DNS設定など）
+5. 取得済みのスナップショット[VM7-snapshot]に復元する
+6. ネットワーク設定を確認する"	ネットワーク設定がスナップショット取得時点の状態に正確に復元され、ネットワーク接続が正常に機能すること	測定値が目標値を満たした場合：合格、満たさない場合：不合格	SN-201	4	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/snapshot/{snapname}/rollback	"JSON_CONTAINS(success,1)"
+スナップショットテスト	SN-402	大規模VMのスナップショット性能確認	"1. 大容量のデータを持つ仮想マシン(VM8)を準備する（例：100GB以上のディスク使用）
+2. VM8のスナップショット取得時間を測定する
+3. スナップショットから復元する時間を測定する
+4. スナップショット操作中のホストシステムへの影響を確認する"	大規模VMのスナップショット取得と復元が許容時間内に完了し、操作中のシステム全体のパフォーマンスへの影響が最小限であること	障害発生時もデータアクセス可能で、復旧後にCephが正常状態に戻った場合：合格、データアクセスに失敗したり、Cephがエラー状態のままの場合：不合格	VM-201、SN-201	4	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/snapshot	"JSON_CONTAINS(data.name,vm8-snapshot)"
+スナップショットテスト	SN-403	高負荷時のスナップショット動作確認	"1. 高負荷状態（CPU/メモリ/ディスクI/O）の仮想マシン(VM9)を準備する
+2. 高負荷状態でVM9のスナップショットを取得する
+3. 高負荷状態でスナップショットからの復元を実行する"	高負荷状態でもスナップショットの取得と復元が正常に完了し、復元後もVMが正常に動作すること	HA設定されたVMが別のノードで自動的に起動した場合：合格、フェイルオーバーが発生しない場合：不合格	VM-201、SN-201	4	API	node1	POST /nodes/pve-cl01-node01/qemu/{vmid}/snapshot	"JSON_CONTAINS(data.name,vm9-snapshot)"
+スナップショットテスト	SN-404	スナップショット削除後のシステム影響確認	"1. 仮想マシン(VM10)の複数のスナップショットを作成する
+2. いくつかのスナップショットを削除する
+3. VM10の動作を確認する
+4. ストレージの状態（容量解放など）を確認する"	スナップショット削除が正常に完了し、VMの動作に影響を与えないこと。ストレージ容量が適切に解放されること	クォーラム喪失時に意図した動作 (操作制限など) が確認できた場合：合格、意図しない動作が発生した場合：不合格	SN-201	4	API	node1	DELETE /nodes/pve-cl01-node01/qemu/{vmid}/snapshot/{snapname}	"JSON_CONTAINS(success,1)"
